@@ -695,6 +695,7 @@ define Device/wmr-300
 endef
 TARGET_DEVICES += wmr-300
 
+<<<<<<< Updated upstream
 define Device/wn3000rpv3
   NETGEAR_HW_ID := 29764836+8+0+32+2x2+0
   NETGEAR_BOARD_ID := WN3000RPv3
@@ -705,6 +706,38 @@ define Device/wn3000rpv3
   IMAGE/factory.bin := $$(sysupgrade_bin) | check-size $$$$(IMAGE_SIZE) | \
 	netgear-dni
   DEVICE_TITLE := Netgear WN3000RPv3
+=======
+define Device/tplink_archer-c5-v4
+  $(Device/tplink-v2)
+  SOC := mt7620a
+  IMAGE_SIZE := 7808k
+  TPLINK_FLASHLAYOUT := 8Mmtk
+  TPLINK_HWID := 0x04DA857C
+  TPLINK_HWREV := 0x0C000600
+  TPLINK_HWREVADD := 0x04000000
+  IMAGES += tftp-recovery.bin
+  IMAGE/tftp-recovery.bin := pad-extra 128k | $$(IMAGE/factory.bin)
+  DEVICE_MODEL := Archer C5
+  DEVICE_VARIANT := v4
+  DEVICE_PACKAGES := kmod-usb2 kmod-usb-ohci kmod-usb-ledtrig-usbport kmod-mt76x2 kmod-switch-rtl8367b
+endef
+TARGET_DEVICES += tplink_archer-c5-v4
+
+define Device/tplink_archer-c50-v1
+  $(Device/tplink-v2)
+  SOC := mt7620a
+  IMAGE_SIZE := 7808k
+  TPLINK_FLASHLAYOUT := 8Mmtk
+  TPLINK_HWID := 0xc7500001
+  TPLINK_HWREV := 69
+  IMAGES := sysupgrade.bin factory-us.bin factory-eu.bin
+  IMAGE/factory-us.bin := tplink-v2-image -e -w 0
+  IMAGE/factory-eu.bin := tplink-v2-image -e -w 2
+  DEVICE_MODEL := Archer C50
+  DEVICE_VARIANT := v1
+  DEVICE_PACKAGES := kmod-mt76x2 kmod-usb2 kmod-usb-ohci
+  SUPPORTED_DEVICES += c50
+>>>>>>> Stashed changes
 endef
 TARGET_DEVICES += wn3000rpv3
 
